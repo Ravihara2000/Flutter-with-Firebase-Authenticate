@@ -7,8 +7,6 @@ import 'package:projx/screens/authentication/sign_in.dart';
  
    @override
    Widget build(BuildContext context) {
-     return MaterialApp(
-      home: Sign_In(),
-     );
+     return Authenticate();
    }
  }
