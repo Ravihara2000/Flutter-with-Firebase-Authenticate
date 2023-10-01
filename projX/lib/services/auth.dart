@@ -15,8 +15,6 @@ class AuthServices {
     return _auth.authStateChanges().map(_userWithFirebaseUserUid);
   }
 
-
-
   //signin anonymous
   Future signInAnonymously() async {
     try {
@@ -28,7 +26,16 @@ class AuthServices {
       return null;
     }
   }
+
   //register using email pw
   //sign in email pw
   //signout
+  Future signOut() async {
+    try {
+      return await _auth.signOut();
+    } catch (err) {
+      print(err.toString());
+      return null;
+    }
+  }
 }
