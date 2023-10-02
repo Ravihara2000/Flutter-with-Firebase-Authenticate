@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:projx/constants/colors.dart';
+import 'package:projx/constants/description.dart';
+import 'package:projx/constants/styles.dart';
 
 import '../../services/auth.dart';
 
@@ -12,24 +15,95 @@ class Sign_In extends StatefulWidget {
 class _Sign_InState extends State<Sign_In> {
   //ref for Autheservices class
   final AuthServices _auth = AuthServices();
+
+  //form key
+  final _formKey = GlobalKey<FormState>();
+  //email pw states
+  String email = "";
+  String password = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Sign In"),
-      ),
-      body: ElevatedButton(
-        child: const Text("Sign In annonymously"),
-        onPressed: () async {
-          dynamic result = await _auth.signInAnonymously();
-          if (result == Null) {
-            print("error in sign in ");
-          } else {
-            print("Sign in annonymously");
-            print(result);
-          }
-        },
-      ),
-    );
+        backgroundColor: bgBlack,
+        appBar: AppBar(
+          backgroundColor: bgBlack,
+          title: const Text("Sign In"),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.only(left: 15, right: 10),
+          child: Column(
+            children: [
+              //description
+              const Text(
+                description,
+                style: descriptionStyle,
+              ),
+              Center(
+                  child: Image.asset(
+                'assets/man.png',
+                height: 200,
+              )),
+              Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      //email
+                      TextFormField(
+                        validator: (val) => val?.isNotEmpty == true
+                            ? "Enter valid email"
+                            : null,
+                        onChanged: (val) {
+                          setState(() {
+                            email = val;
+                          });
+                        },
+                      ),
+                      //pw
+                      TextFormField(
+                        validator: (val) =>
+                            val!.length < 6 ? "Enter a valid password" : null,
+                        onChanged: (val) {
+                          setState(() {
+                            password = val;
+                          });
+                        },
+                      ),
+                      //btn
+                      //google
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const Text(
+                        "Login with social accounts",
+                        style: descriptionStyle,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Center(
+                          child: Image.asset(
+                        'assets/google.png',
+                        height: 50,
+                      )
+                      ),
+                      const Text("Do not have an account?"),
+                      //anno
+                    ],
+                  ))
+            ],
+          ),
+        ));
   }
 }
+
+
+// ElevatedButton(
+//         child: const Text("Sign In annonymously"),
+//         onPressed: () async {
+//           dynamic result = await _auth.signInAnonymously();
+//           if (result == Null) {
+//             print("error in sign in ");
+//           } else {
+//             print("Sign in annonymously");
+//             print(result.uid);
+//           }
