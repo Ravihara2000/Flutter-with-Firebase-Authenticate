@@ -80,15 +80,40 @@ class _Sign_InState extends State<Sign_In> {
                       const SizedBox(
                         height: 20,
                       ),
-                      Center(
-                          child: Image.asset(
-                        'assets/google.png',
-                        height: 50,
-                      )),
+                      GestureDetector(
+                        //sign in with google acc
+                        onTap: (){},
+                        child: Center(
+                            child: Image.asset(
+                          'assets/google.png',
+                          height: 50,
+                        )),
+                      ),
                       const SizedBox(
                         height: 30,
                       ),
-                      const Text("Do not have an account?"),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            "Do not have an account?",
+                            style: descriptionStyle,
+                            ),
+                                                  const SizedBox(
+                        width: 10,
+                      ),
+                      GestureDetector(
+                        //move to regsiter page
+                        onTap: () {},
+                        child: const Text(
+                          "Register",
+                          style: TextStyle(color:mainBlue),
+                        ),
+                      )
+
+                        ],
+                      )
+                      
 
                       //anno
                     ],
