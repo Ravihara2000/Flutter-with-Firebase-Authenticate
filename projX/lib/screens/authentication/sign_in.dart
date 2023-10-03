@@ -82,7 +82,7 @@ class _Sign_InState extends State<Sign_In> {
                       ),
                       GestureDetector(
                         //sign in with google acc
-                        onTap: (){},
+                        onTap: () {},
                         child: Center(
                             child: Image.asset(
                           'assets/google.png',
@@ -98,22 +98,66 @@ class _Sign_InState extends State<Sign_In> {
                           const Text(
                             "Do not have an account?",
                             style: descriptionStyle,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          GestureDetector(
+                            //move to regsiter page
+                            onTap: () {},
+                            child: const Text(
+                              "Register",
+                              style: TextStyle(color: mainBlue),
                             ),
-                                                  const SizedBox(
-                        width: 10,
+                          )
+                        ],
                       ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      //login user
                       GestureDetector(
-                        //move to regsiter page
                         onTap: () {},
-                        child: const Text(
-                          "Register",
-                          style: TextStyle(color:mainBlue),
+                        child: Container(
+                          height: 40,
+                          width: 200,
+                          decoration: BoxDecoration(
+                              color: bgBlack,
+                              borderRadius: BorderRadius.circular(100),
+                              border: Border.all(width: 2, color: mainYellow)),
+                          child: Center(
+                            child: const Text(
+                              "LOG IN",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      //anno btn
+                      GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                          height: 40,
+                          width: 200,
+                          decoration: BoxDecoration(
+                              color: bgBlack,
+                              borderRadius: BorderRadius.circular(100),
+                              border: Border.all(width: 2, color: mainBlue)),
+                          child: Center(
+                            child: const Text(
+                              "LOG IN AS GUEST",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ),
                         ),
                       )
-
-                        ],
-                      )
-                      
 
                       //anno
                     ],
