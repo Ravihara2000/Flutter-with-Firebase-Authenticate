@@ -84,9 +84,12 @@ class _Sign_InState extends State<Sign_In> {
                           child: Image.asset(
                         'assets/google.png',
                         height: 50,
-                      )
+                      )),
+                      const SizedBox(
+                        height: 30,
                       ),
                       const Text("Do not have an account?"),
+
                       //anno
                     ],
                   ))
