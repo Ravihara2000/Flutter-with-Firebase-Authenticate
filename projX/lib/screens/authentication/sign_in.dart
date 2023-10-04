@@ -24,6 +24,7 @@ class _Sign_InState extends State<Sign_In> {
   //email pw states
   String email = "";
   String password = "";
+  String error = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +34,8 @@ class _Sign_InState extends State<Sign_In> {
           backgroundColor: bgBlack,
           title: const Text("Sign In"),
         ),
-        body: Padding(
+        body: SingleChildScrollView(
+          child:Padding(
           padding: const EdgeInsets.only(left: 15, right: 10),
           child: Column(
             children: [
@@ -57,8 +59,9 @@ class _Sign_InState extends State<Sign_In> {
                         TextFormField(
                           style: TextStyle(color: Colors.white),
                           decoration: textInputDecoration,
-                          validator: (val) => val?.isNotEmpty == true
-                              ? "Enter valid email"
+                          validator: (val) =>
+                           val!.isEmpty ?
+                               "Enter valid email"
                               : null,
                           onChanged: (val) {
                             setState(() {
@@ -71,16 +74,21 @@ class _Sign_InState extends State<Sign_In> {
                         ),
                         //pw
                         TextFormField(
+                          obscureText: true,
                           style: TextStyle(color: Colors.white),
                           decoration: textInputDecoration.copyWith(
                               hintText: "Password"),
                           validator: (val) =>
-                              val!.length < 6 ? "Enter a valid password" : null,
+                              val!.length < 6 ? "Password must be at least 6 characters" : null,
                           onChanged: (val) {
                             setState(() {
                               password = val;
                             });
                           },
+                        ),
+                        Text(
+                          error,
+                          style: TextStyle(color: Colors.red),
                         ),
                         //btn
                         //google
@@ -101,7 +109,8 @@ class _Sign_InState extends State<Sign_In> {
                               child: Image.asset(
                             'assets/google.png',
                             height: 50,
-                          )),
+                          ),
+                          ),
                         ),
                         const SizedBox(
                           height: 30,
@@ -120,11 +129,10 @@ class _Sign_InState extends State<Sign_In> {
                               //move to regsiter page
                               onTap: () {
                                 widget.toggle();
-                                ();
                               },
                               child: const Text(
                                 "Register",
-                                style: TextStyle(color: mainBlue),
+                                style: TextStyle(color: mainBlue,fontWeight: FontWeight.w600),
                               ),
                             )
                           ],
@@ -134,7 +142,15 @@ class _Sign_InState extends State<Sign_In> {
                         ),
                         //login user
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () async{
+                            dynamic result = await _auth.signinUsingEmailAndPassword(email, password);
+
+                            if(result==null){
+                              setState(() {
+                              error = "Could not signin with those credentials";
+                            });
+                            }
+                          },
                           child: Container(
                             height: 40,
                             width: 200,
@@ -143,7 +159,7 @@ class _Sign_InState extends State<Sign_In> {
                                 borderRadius: BorderRadius.circular(100),
                                 border:
                                     Border.all(width: 2, color: mainYellow)),
-                            child: Center(
+                            child: const Center(
                               child: const Text(
                                 "LOG IN",
                                 style: TextStyle(
@@ -158,7 +174,10 @@ class _Sign_InState extends State<Sign_In> {
                         ),
                         //anno btn
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () async {
+                            await _auth
+                                .signInAnonymously();
+                          },
                           child: Container(
                             height: 40,
                             width: 200,
@@ -175,7 +194,8 @@ class _Sign_InState extends State<Sign_In> {
                               ),
                             ),
                           ),
-                        )
+                        ),
+                    
 
                         //anno
                       ],
@@ -183,7 +203,9 @@ class _Sign_InState extends State<Sign_In> {
               )
             ],
           ),
-        ));
+        ),
+        ),
+    );
   }
 }
 

@@ -71,6 +71,7 @@ class _RegisterState extends State<Register> {
                         ),
                         //pw
                         TextFormField(
+                          obscureText: true,
                           style: TextStyle(color: Colors.white),
                           decoration: textInputDecoration.copyWith(
                               hintText: "Passowrd"),
