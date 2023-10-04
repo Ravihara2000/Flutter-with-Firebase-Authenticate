@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projx/models/UserModel.dart';
 import 'package:projx/screens/authentication/authenticate.dart';
+import 'package:projx/screens/authentication/register.dart';
 import 'package:projx/screens/authentication/sign_in.dart';
 import 'package:projx/screens/home/home.dart';
 import 'package:provider/provider.dart';

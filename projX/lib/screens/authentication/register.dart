@@ -5,7 +5,10 @@ import 'package:projx/constants/styles.dart';
 import 'package:projx/services/auth.dart';
 
 class Register extends StatefulWidget {
-  const Register({super.key});
+  //fucntion
+  final Function toggle;
+
+  const Register({Key? key, required this.toggle}) : super(key: key);
 
   @override
   State<Register> createState() => _RegisterState();
@@ -20,10 +23,11 @@ class _RegisterState extends State<Register> {
   //email pw states
   String email = "";
   String password = "";
+  String error = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: false,
         backgroundColor: bgBlack,
         appBar: AppBar(
           backgroundColor: bgBlack,
@@ -51,6 +55,7 @@ class _RegisterState extends State<Register> {
                       children: [
                         //email
                         TextFormField(
+                          style: TextStyle(color: Colors.white),
                           decoration: textInputDecoration,
                           validator: (val) => val?.isNotEmpty == true
                               ? "Enter valid email"
@@ -66,10 +71,12 @@ class _RegisterState extends State<Register> {
                         ),
                         //pw
                         TextFormField(
-                          decoration:
-                              textInputDecoration.copyWith(hintText: "Passowrd"),
-                          validator: (val) =>
-                              val!.length < 6 ? "Password must be at leaset 6 characters" : null,
+                          style: TextStyle(color: Colors.white),
+                          decoration: textInputDecoration.copyWith(
+                              hintText: "Passowrd"),
+                          validator: (val) => val!.length < 6
+                              ? "Password must be at leaset 6 characters"
+                              : null,
                           onChanged: (val) {
                             setState(() {
                               password = val;
@@ -81,6 +88,10 @@ class _RegisterState extends State<Register> {
                         const SizedBox(
                           height: 20,
                         ),
+                        Text(
+                          error,
+                          style: TextStyle(color: Colors.red) ,
+                          ),
                         const Text(
                           "Login with social accounts",
                           style: descriptionStyle,
@@ -111,8 +122,11 @@ class _RegisterState extends State<Register> {
                               width: 10,
                             ),
                             GestureDetector(
-                              //move to regsiter page
-                              onTap: () {},
+                              //move to sign in page
+
+                              onTap: () {
+                                widget.toggle();
+                              },
                               child: const Text(
                                 "Log In",
                                 style: TextStyle(color: mainBlue),
@@ -125,14 +139,25 @@ class _RegisterState extends State<Register> {
                         ),
                         //login user
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () async {
+                            dynamic result = await _auth
+                                .registerWithEmailAndPassword(email, password);
+
+                            if (result == null) {
+                              //err
+                              setState(() {
+                                error = "Please enter a valid email";
+                              });
+                            }
+                          },
                           child: Container(
                             height: 40,
                             width: 200,
                             decoration: BoxDecoration(
                                 color: bgBlack,
                                 borderRadius: BorderRadius.circular(100),
-                                border: Border.all(width: 2, color: mainYellow)),
+                                border:
+                                    Border.all(width: 2, color: mainYellow)),
                             child: Center(
                               child: const Text(
                                 "REGISTER",
@@ -143,7 +168,7 @@ class _RegisterState extends State<Register> {
                             ),
                           ),
                         ),
-              
+
                         //anno
                       ],
                     )),

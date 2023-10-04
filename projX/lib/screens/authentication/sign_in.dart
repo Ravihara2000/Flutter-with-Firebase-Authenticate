@@ -6,7 +6,10 @@ import 'package:projx/constants/styles.dart';
 import '../../services/auth.dart';
 
 class Sign_In extends StatefulWidget {
-  const Sign_In({super.key});
+  //fucntion
+  final Function toggle;
+
+  const Sign_In({Key? key, required this.toggle}) : super(key: key);
 
   @override
   State<Sign_In> createState() => _Sign_InState();
@@ -24,7 +27,7 @@ class _Sign_InState extends State<Sign_In> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: false,
         backgroundColor: bgBlack,
         appBar: AppBar(
           backgroundColor: bgBlack,
@@ -52,6 +55,7 @@ class _Sign_InState extends State<Sign_In> {
                       children: [
                         //email
                         TextFormField(
+                          style: TextStyle(color: Colors.white),
                           decoration: textInputDecoration,
                           validator: (val) => val?.isNotEmpty == true
                               ? "Enter valid email"
@@ -67,6 +71,7 @@ class _Sign_InState extends State<Sign_In> {
                         ),
                         //pw
                         TextFormField(
+                          style: TextStyle(color: Colors.white),
                           decoration: textInputDecoration.copyWith(
                               hintText: "Password"),
                           validator: (val) =>
@@ -113,7 +118,10 @@ class _Sign_InState extends State<Sign_In> {
                             ),
                             GestureDetector(
                               //move to regsiter page
-                              onTap: () {},
+                              onTap: () {
+                                widget.toggle();
+                                ();
+                              },
                               child: const Text(
                                 "Register",
                                 style: TextStyle(color: mainBlue),
