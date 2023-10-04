@@ -24,6 +24,7 @@ class _Sign_InState extends State<Sign_In> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
         backgroundColor: bgBlack,
         appBar: AppBar(
           backgroundColor: bgBlack,
@@ -43,125 +44,135 @@ class _Sign_InState extends State<Sign_In> {
                 'assets/man.png',
                 height: 200,
               )),
-              Form(
-                  key: _formKey,
-                  child: Column(
-                    children: [
-                      //email
-                      TextFormField(
-                        validator: (val) => val?.isNotEmpty == true
-                            ? "Enter valid email"
-                            : null,
-                        onChanged: (val) {
-                          setState(() {
-                            email = val;
-                          });
-                        },
-                      ),
-                      //pw
-                      TextFormField(
-                        validator: (val) =>
-                            val!.length < 6 ? "Enter a valid password" : null,
-                        onChanged: (val) {
-                          setState(() {
-                            password = val;
-                          });
-                        },
-                      ),
-                      //btn
-                      //google
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Text(
-                        "Login with social accounts",
-                        style: descriptionStyle,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      GestureDetector(
-                        //sign in with google acc
-                        onTap: () {},
-                        child: Center(
-                            child: Image.asset(
-                          'assets/google.png',
-                          height: 50,
-                        )),
-                      ),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text(
-                            "Do not have an account?",
-                            style: descriptionStyle,
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          GestureDetector(
-                            //move to regsiter page
-                            onTap: () {},
-                            child: const Text(
-                              "Register",
-                              style: TextStyle(color: mainBlue),
-                            ),
-                          )
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      //login user
-                      GestureDetector(
-                        onTap: () {},
-                        child: Container(
-                          height: 40,
-                          width: 200,
-                          decoration: BoxDecoration(
-                              color: bgBlack,
-                              borderRadius: BorderRadius.circular(100),
-                              border: Border.all(width: 2, color: mainYellow)),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        //email
+                        TextFormField(
+                          decoration: textInputDecoration,
+                          validator: (val) => val?.isNotEmpty == true
+                              ? "Enter valid email"
+                              : null,
+                          onChanged: (val) {
+                            setState(() {
+                              email = val;
+                            });
+                          },
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        //pw
+                        TextFormField(
+                          decoration: textInputDecoration.copyWith(
+                              hintText: "Password"),
+                          validator: (val) =>
+                              val!.length < 6 ? "Enter a valid password" : null,
+                          onChanged: (val) {
+                            setState(() {
+                              password = val;
+                            });
+                          },
+                        ),
+                        //btn
+                        //google
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        const Text(
+                          "Login with social accounts",
+                          style: descriptionStyle,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        GestureDetector(
+                          //sign in with google acc
+                          onTap: () {},
                           child: Center(
-                            child: const Text(
-                              "LOG IN",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500),
+                              child: Image.asset(
+                            'assets/google.png',
+                            height: 50,
+                          )),
+                        ),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              "Do not have an account?",
+                              style: descriptionStyle,
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            GestureDetector(
+                              //move to regsiter page
+                              onTap: () {},
+                              child: const Text(
+                                "Register",
+                                style: TextStyle(color: mainBlue),
+                              ),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        //login user
+                        GestureDetector(
+                          onTap: () {},
+                          child: Container(
+                            height: 40,
+                            width: 200,
+                            decoration: BoxDecoration(
+                                color: bgBlack,
+                                borderRadius: BorderRadius.circular(100),
+                                border:
+                                    Border.all(width: 2, color: mainYellow)),
+                            child: Center(
+                              child: const Text(
+                                "LOG IN",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w500),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      //anno btn
-                      GestureDetector(
-                        onTap: () {},
-                        child: Container(
-                          height: 40,
-                          width: 200,
-                          decoration: BoxDecoration(
-                              color: bgBlack,
-                              borderRadius: BorderRadius.circular(100),
-                              border: Border.all(width: 2, color: mainBlue)),
-                          child: Center(
-                            child: const Text(
-                              "LOG IN AS GUEST",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        //anno btn
+                        GestureDetector(
+                          onTap: () {},
+                          child: Container(
+                            height: 40,
+                            width: 200,
+                            decoration: BoxDecoration(
+                                color: bgBlack,
+                                borderRadius: BorderRadius.circular(100),
+                                border: Border.all(width: 2, color: mainBlue)),
+                            child: Center(
+                              child: const Text(
+                                "LOG IN AS GUEST",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w500),
+                              ),
                             ),
                           ),
-                        ),
-                      )
+                        )
 
-                      //anno
-                    ],
-                  ))
+                        //anno
+                      ],
+                    )),
+              )
             ],
           ),
         ));
